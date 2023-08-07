@@ -1,0 +1,31 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Keep Clone</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Google Keep Clone</h1>
+    <form action="/add" method="POST">
+      <input type="text" name="title" placeholder="Title" required>
+      <textarea name="content" placeholder="Take a note..." required></textarea>
+      <button type="submit">Add Note</button>
+    </form>
+    <div class="notes">
+      <% for (const note of notes) { %>
+        <div class="note">
+          <h3><%= note.title %></h3>
+          <p><%= note.content %></p>
+          <form action="/delete" method="POST">
+            <input type="hidden" name="id" value="<%= note._id %>">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <script src="/js/script.js"></script>
+</body>
+</html>
